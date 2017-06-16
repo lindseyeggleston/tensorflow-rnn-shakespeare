@@ -125,7 +125,7 @@ def rnn_minibatch_sequencer(raw_data, batch_size, sequence_size, nb_epochs):
         for batch in range(nb_batches):
             X = xdata[:, batch * sequence_size:(batch + 1) * sequence_size]
             y = ydata[:, batch * sequence_size:(batch + 1) * sequence_size]
-            X = np.roll(x, -epoch, axis=0)  # to continue the text from epoch to epoch (do not reset rnn state!)
+            X = np.roll(X, -epoch, axis=0)  # to continue the text from epoch to epoch (do not reset rnn state!)
             y = np.roll(y, -epoch, axis=0)
             yield X, y, epoch
 

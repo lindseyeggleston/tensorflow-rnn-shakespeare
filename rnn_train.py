@@ -190,7 +190,7 @@ for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN, nb_
     istate = ostate
     step += BATCHSIZE * SEQLEN
 
-with open('book1_model.pkl', 'wb') as p:
+with open('models/book1_model.pkl', 'wb') as p:
     pickle.dump(rnn, p)
 
 # all runs: SEQLEN = 30, BATCHSIZE = 100, ALPHASIZE = 98, INTERNALSIZE = 512, NLAYERS = 3
