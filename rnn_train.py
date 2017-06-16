@@ -38,8 +38,8 @@ tf.set_random_seed(0)
 #         To see the curves drift apart ("overfitting") try to use an insufficient amount of
 #         training data (shakedir = "shakespeare/t*.txt" for example)
 #
-SEQLEN = 30
-BATCHSIZE = 200
+SEQLEN = 50
+BATCHSIZE = 100
 ALPHASIZE = txt.ALPHASIZE
 INTERNALSIZE = 512
 NLAYERS = 3
@@ -47,7 +47,7 @@ learning_rate = 0.001  # fixed learning rate
 dropout_pkeep = 0.8    # some dropout
 
 # load data, either shakespeare, or the Python source of Tensorflow itself
-shakedir = "text/book1.txt"
+shakedir = "../soif_data/characters/cersei.txt"
 #shakedir = "../tensorflow/**/*.py"
 codetext, valitext, bookranges = txt.read_data_files(shakedir, validation=True)
 
@@ -134,6 +134,7 @@ init = tf.global_variables_initializer()
 sess = tf.Session()
 sess.run(init)
 step = 0
+saver = tf.train.Saver()
 
 # training loop
 for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN, nb_epochs=10):
@@ -190,8 +191,7 @@ for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN, nb_
     istate = ostate
     step += BATCHSIZE * SEQLEN
 
-with open('models/book1_model.pkl', 'wb') as p:
-    pickle.dump(rnn, p)
+saver.save(sess, 'trained_cersei', global_step=1000)
 
 # all runs: SEQLEN = 30, BATCHSIZE = 100, ALPHASIZE = 98, INTERNALSIZE = 512, NLAYERS = 3
 # run 1477669632 decaying learning rate 0.001-0.0001-1e7 dropout 0.5: not good

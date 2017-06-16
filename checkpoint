@@ -1,0 +1,5 @@
+model_checkpoint_path: "trained_cersei-1000"
+all_model_checkpoint_paths: "checkpoints/rnn_train_1497637612-0"
+all_model_checkpoint_paths: "checkpoints/rnn_train_1497637612-2500000"
+all_model_checkpoint_paths: "checkpoints/rnn_train_1497637612-5000000"
+all_model_checkpoint_paths: "trained_cersei-1000"
