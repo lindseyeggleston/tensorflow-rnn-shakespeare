@@ -33,7 +33,7 @@ def convert_from_alphabet(a):
     :param a: one character
     :return: the encoded value
     """
-    if a == 9:
+    if a == 9: # tab
         return 1
     if a == 10:
         return 127 - 30  # LF
@@ -123,11 +123,11 @@ def rnn_minibatch_sequencer(raw_data, batch_size, sequence_size, nb_epochs):
 
     for epoch in range(nb_epochs):
         for batch in range(nb_batches):
-            x = xdata[:, batch * sequence_size:(batch + 1) * sequence_size]
+            X = xdata[:, batch * sequence_size:(batch + 1) * sequence_size]
             y = ydata[:, batch * sequence_size:(batch + 1) * sequence_size]
-            x = np.roll(x, -epoch, axis=0)  # to continue the text from epoch to epoch (do not reset rnn state!)
+            X = np.roll(x, -epoch, axis=0)  # to continue the text from epoch to epoch (do not reset rnn state!)
             y = np.roll(y, -epoch, axis=0)
-            yield x, y, epoch
+            yield X, y, epoch
 
 
 def find_book(index, bookranges):
